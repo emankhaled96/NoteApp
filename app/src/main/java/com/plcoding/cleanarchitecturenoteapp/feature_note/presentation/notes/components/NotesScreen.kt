@@ -19,8 +19,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.plcoding.cleanarchitecturenoteapp.feature_note.domain.model.Note
+import com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.add_edit_note.components.AddEditNoteScreen
 import com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.notes.NotesEvent
 import com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.notes.NotesViewModel
+import com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.utils.Screen
 import com.plcoding.cleanarchitecturenoteapp.ui.theme.BabyBlue
 import kotlinx.coroutines.launch
 
@@ -36,7 +38,9 @@ fun NotesScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {}, backgroundColor = MaterialTheme.colors.primary
+                onClick = {
+                          navController.navigate(Screen.AddEditNoteScreen.route)
+                }, backgroundColor = MaterialTheme.colors.primary
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
 
@@ -83,7 +87,9 @@ fun NotesScreen(
                     NoteItem(note = note,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { },
+                            .clickable {
+                                       navController.navigate(Screen.AddEditNoteScreen.route+"?noteId=${note.id}&noteColor=${note.color}")
+                            },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))
                             scope.launch {

@@ -51,7 +51,7 @@ fun AddEditNoteScreen(
                         message = event.message
                     )
                 }
-                is AddEditNoteViewModel.UiEvent.SaveNote ->{
+                is AddEditNoteViewModel.UiEvent.SaveNote -> {
                     navController.navigateUp()
                 }
             }
@@ -89,6 +89,7 @@ fun AddEditNoteScreen(
                         .background(color)
                         .border(
                             width = 3.dp,
+                            shape = CircleShape,
                             color = if (viewModel.noteColor.value == colorInt) {
                                 Color.Black
                             } else Color.Transparent
@@ -116,7 +117,9 @@ fun AddEditNoteScreen(
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
+
                 textStyle = MaterialTheme.typography.h5
+            , modifier = Modifier.height(50.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextFields(
@@ -128,8 +131,7 @@ fun AddEditNoteScreen(
                     viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
                 },
                 isHintVisible = contentState.isHintVisible,
-                singleLine = true,
-                textStyle = MaterialTheme.typography.h5,
+                 textStyle = MaterialTheme.typography.h5,
                 modifier = Modifier.fillMaxHeight()
             )
 
